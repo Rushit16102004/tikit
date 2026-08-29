@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Elements
+  const PIN_CODE = '123123'; // Developer PIN
+
+  // Display Elements
   const displayCinema = document.getElementById('displayCinema');
   const displayAddress = document.getElementById('displayAddress');
   const displayMovie = document.getElementById('displayMovie');
@@ -18,54 +20,89 @@ document.addEventListener('DOMContentLoaded', () => {
   const displayTicketCost = document.getElementById('displayTicketCost');
   const displayCountVal = document.getElementById('displayCountVal');
 
-  // Load Config (Default to TICKET_CONFIG defined in config.js)
-  function getConfig() {
-    const params = new URLSearchParams(window.location.search);
-    const cfg = (typeof TICKET_CONFIG !== 'undefined') ? { ...TICKET_CONFIG } : {};
+  // Developer Elements & Modals
+  const devSecretBtn = document.getElementById('devSecretBtn');
+  const logoDevTrigger = document.getElementById('logoDevTrigger');
+  const pinModal = document.getElementById('pinModal');
+  const closePinModal = document.getElementById('closePinModal');
+  const pinInput = document.getElementById('pinInput');
+  const pinErrorMsg = document.getElementById('pinErrorMsg');
+  const btnVerifyPin = document.getElementById('btnVerifyPin');
 
+  const devConfigModal = document.getElementById('devConfigModal');
+  const closeConfigModal = document.getElementById('closeConfigModal');
+
+  // Developer Inputs
+  const devMovie = document.getElementById('devMovie');
+  const devDate = document.getElementById('devDate');
+  const devTime = document.getElementById('devTime');
+  const devTicketCount = document.getElementById('devTicketCount');
+  const devTicketPrice = document.getElementById('devTicketPrice');
+  const devCinema = document.getElementById('devCinema');
+  const devScreen = document.getElementById('devScreen');
+  const devSeats = document.getElementById('devSeats');
+  const devBookingId = document.getElementById('devBookingId');
+  const devInvoiceNo = document.getElementById('devInvoiceNo');
+  const devTotalPreview = document.getElementById('devTotalPreview');
+
+  const btnSaveConfig = document.getElementById('btnSaveConfig');
+  const btnResetConfig = document.getElementById('btnResetConfig');
+
+  // Active Ticket Configuration state
+  let currentConfig = {};
+
+  // Load Config (Priority: localStorage > URL params > config.js)
+  function loadConfig() {
+    let cfg = (typeof TICKET_CONFIG !== 'undefined') ? { ...TICKET_CONFIG } : {};
+
+    // Check localStorage
+    const saved = localStorage.getItem('developer_ticket_config');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        cfg = { ...cfg, ...parsed };
+      } catch (e) {}
+    }
+
+    // Check URL params
+    const params = new URLSearchParams(window.location.search);
     if (params.has('movie')) cfg.movieName = params.get('movie');
     if (params.has('cinema')) cfg.cinema = params.get('cinema');
-    if (params.has('address')) cfg.cinemaAddress = params.get('address');
     if (params.has('date')) cfg.date = params.get('date');
     if (params.has('time')) cfg.time = params.get('time');
-    if (params.has('screen')) cfg.screen = params.get('screen');
-    if (params.has('class')) cfg.ticketClass = params.get('class');
     if (params.has('tickets')) cfg.ticketCount = parseInt(params.get('tickets')) || 1;
     if (params.has('price')) cfg.ticketPrice = parseFloat(params.get('price')) || 0;
     if (params.has('seats')) cfg.seats = params.get('seats');
-    if (params.has('invoice')) cfg.invoiceNo = params.get('invoice');
-    if (params.has('userId')) cfg.userId = params.get('userId');
-    if (params.has('workstation')) cfg.workstation = params.get('workstation');
     if (params.has('bookingId')) cfg.bookingId = params.get('bookingId');
 
+    currentConfig = cfg;
     return cfg;
   }
 
   function renderTicket() {
-    const cfg = getConfig();
+    const cfg = loadConfig();
 
-    const movieName = cfg.movieName || 'TOXIC - HINDI (A)';
+    const movieName = cfg.movieName || 'SPIDER-MAN - HINDI (UA)';
     const cinema = cfg.cinema || 'Rajhans Cinemas - Katargam';
     const address = cfg.cinemaAddress || 'Rajhans Flamingo Mall, Ambatalavadi, Katargam, Surat, Gujarat 395004, India';
-    const dateVal = cfg.date || '2026-08-28';
-    const timeVal = cfg.time || '22:30';
+    const dateVal = cfg.date || '2026-08-29';
+    const timeVal = cfg.time || '14:30';
     const screenNum = cfg.screen || '1';
-    const ticketClass = cfg.ticketClass || 'EXECUTIVE';
 
     let count = parseInt(cfg.ticketCount) || 1;
     if (count < 1) count = 1;
 
-    let singlePrice = parseFloat(cfg.ticketPrice) || 340;
+    let singlePrice = parseFloat(cfg.ticketPrice) || 280;
     if (singlePrice < 0) singlePrice = 0;
 
-    // Automatic Price Calculation (Count * Single Price)
+    // Total Calculation (Tickets * Price)
     const totalAmount = count * singlePrice;
 
-    const seats = cfg.seats || `${ticketClass} C-10, C-11`;
-    const invoiceNo = cfg.invoiceNo || '01003013';
+    const seats = cfg.seats || `EXECUTIVE C-10, EXE C-11`;
+    const invoiceNo = cfg.invoiceNo || '01003014';
     const userId = cfg.userId || '1303';
     const workstation = cfg.workstation || 'HORAJPC529';
-    const bookingId = cfg.bookingId || 'T18 0000000001700366';
+    const bookingId = cfg.bookingId || 'T18 0000000001700367';
 
     // Format Date & Time
     let dateStr = dateVal;
@@ -92,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } catch (e) {}
 
-    // Cost Breakup Calculations
+    // Tax Breakup
     const scAmount = Math.round(totalAmount * 0.0623 * 100) / 100;
     const remaining = totalAmount - scAmount;
     const netCharge = Math.round((remaining / 1.18) * 100) / 100;
@@ -151,5 +188,89 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Developer PIN Authentication
+  function openPinModal() {
+    pinInput.value = '';
+    pinErrorMsg.style.display = 'none';
+    pinModal.classList.add('active');
+    setTimeout(() => pinInput.focus(), 100);
+  }
+
+  function verifyPin() {
+    if (pinInput.value.trim() === PIN_CODE) {
+      pinModal.classList.remove('active');
+      openDevConfigModal();
+    } else {
+      pinErrorMsg.style.display = 'block';
+    }
+  }
+
+  // Developer Config Editor Modal
+  function openDevConfigModal() {
+    const cfg = currentConfig;
+    devMovie.value = cfg.movieName || '';
+    devDate.value = cfg.date || '';
+    devTime.value = cfg.time || '';
+    devTicketCount.value = cfg.ticketCount || 2;
+    devTicketPrice.value = cfg.ticketPrice || 280;
+    devCinema.value = cfg.cinema || '';
+    devScreen.value = cfg.screen || '1';
+    devSeats.value = cfg.seats || '';
+    devBookingId.value = cfg.bookingId || '';
+    devInvoiceNo.value = cfg.invoiceNo || '';
+
+    updateDevTotalPreview();
+    devConfigModal.classList.add('active');
+  }
+
+  function updateDevTotalPreview() {
+    const count = parseInt(devTicketCount.value) || 1;
+    const price = parseFloat(devTicketPrice.value) || 0;
+    devTotalPreview.textContent = `₹${(count * price).toFixed(2)}`;
+  }
+
+  function saveDevConfig() {
+    const updated = {
+      movieName: devMovie.value.trim(),
+      date: devDate.value,
+      time: devTime.value,
+      ticketCount: parseInt(devTicketCount.value) || 1,
+      ticketPrice: parseFloat(devTicketPrice.value) || 0,
+      cinema: devCinema.value.trim(),
+      screen: devScreen.value.trim(),
+      seats: devSeats.value.trim(),
+      bookingId: devBookingId.value.trim(),
+      invoiceNo: devInvoiceNo.value.trim()
+    };
+
+    localStorage.setItem('developer_ticket_config', JSON.stringify(updated));
+    devConfigModal.classList.remove('active');
+    renderTicket();
+  }
+
+  function resetDevConfig() {
+    localStorage.removeItem('developer_ticket_config');
+    devConfigModal.classList.remove('active');
+    renderTicket();
+  }
+
+  // Event Listeners for Developer Mode
+  if (devSecretBtn) devSecretBtn.addEventListener('click', openPinModal);
+  if (logoDevTrigger) logoDevTrigger.addEventListener('click', openPinModal);
+  if (closePinModal) closePinModal.addEventListener('click', () => pinModal.classList.remove('active'));
+  if (btnVerifyPin) btnVerifyPin.addEventListener('click', verifyPin);
+  
+  pinInput.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') verifyPin();
+  });
+
+  if (closeConfigModal) closeConfigModal.addEventListener('click', () => devConfigModal.classList.remove('active'));
+  if (btnSaveConfig) btnSaveConfig.addEventListener('click', saveDevConfig);
+  if (btnResetConfig) btnResetConfig.addEventListener('click', resetDevConfig);
+
+  devTicketCount.addEventListener('input', updateDevTotalPreview);
+  devTicketPrice.addEventListener('input', updateDevTotalPreview);
+
+  // Initial Render
   renderTicket();
 });

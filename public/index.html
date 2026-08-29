@@ -21,10 +21,14 @@
   <!-- App Header -->
   <header class="app-header">
     <div class="brand-wrapper">
-      <img src="assets/logo.png" alt="Rajhans Cinemas" class="app-logo">
+      <img src="assets/logo.png" alt="Rajhans Cinemas" class="app-logo" id="logoDevTrigger" title="Developer Trigger">
       <span class="app-title">Rajhans Cinemas E-Ticket</span>
     </div>
-    <button onclick="window.print()" class="btn-print-top">🖨️ Print / Save</button>
+    <div class="header-right-actions">
+      <!-- Hidden Developer Key Button -->
+      <button id="devSecretBtn" class="dev-secret-btn" title="Developer Config">🔒</button>
+      <button onclick="window.print()" class="btn-print-top">🖨️ Print / Save</button>
+    </div>
   </header>
 
   <!-- Main Container: Direct Ticket View -->
@@ -71,7 +75,7 @@
               </svg>
             </div>
             <div class="text-col">
-              <div class="bold-text" id="displayMovie">TOXIC - HINDI (A)</div>
+              <div class="bold-text" id="displayMovie">SPIDER-MAN - HINDI (UA)</div>
             </div>
           </div>
 
@@ -83,7 +87,7 @@
               </svg>
             </div>
             <div class="text-col">
-              <div class="bold-text" id="displayDate">Fri 28/08/2026 | 10:30 pm</div>
+              <div class="bold-text" id="displayDate">Sat 29/08/2026 | 02:30 pm</div>
             </div>
           </div>
 
@@ -106,7 +110,7 @@
 
         <!-- Invoice Metadata -->
         <div class="invoice-meta-section">
-          <div class="meta-row"><strong>Invoice no.</strong> <span id="displayInvoice">01003013</span></div>
+          <div class="meta-row"><strong>Invoice no.</strong> <span id="displayInvoice">01003014</span></div>
           <div class="meta-row">User ID : <span id="displayUser">1303</span></div>
           <div class="meta-row">Workstation : <span id="displayWorkstation">HORAJPC529</span></div>
         </div>
@@ -123,23 +127,23 @@
         <!-- Dynamic QR Code & Booking ID -->
         <div class="qr-section">
           <div id="qrCodeContainer" class="qr-wrapper"></div>
-          <div class="booking-id-text" id="displayBookingId">Booking ID - T18 0000000001700366</div>
+          <div class="booking-id-text" id="displayBookingId">Booking ID - T18 0000000001700367</div>
         </div>
 
         <!-- Total Amount & Cost Breakup -->
         <div class="pricing-section">
           <div class="total-paid-row">
             <span class="label">Total amount paid:</span>
-            <span class="value" id="displayTotalPaid">₹680.00</span>
+            <span class="value" id="displayTotalPaid">₹560.00</span>
           </div>
 
           <div class="breakup-title">Cost Breakup:</div>
           <div class="breakup-list">
-            <div class="breakup-item"><span>Net Charge:</span><span id="displayNetCharge">₹533.90</span></div>
-            <div class="breakup-item"><span>CGST :</span><span id="displayCgst">₹51.86</span></div>
-            <div class="breakup-item"><span>SGST :</span><span id="displaySgst">₹51.86</span></div>
-            <div class="breakup-item"><span>SC (Included in ticket cost):</span><span id="displaySc">₹42.38</span></div>
-            <div class="breakup-item"><span>Ticket Cost:</span><span id="displayTicketCost">₹680.00</span></div>
+            <div class="breakup-item"><span>Net Charge:</span><span id="displayNetCharge">₹439.68</span></div>
+            <div class="breakup-item"><span>CGST :</span><span id="displayCgst">₹42.71</span></div>
+            <div class="breakup-item"><span>SGST :</span><span id="displaySgst">₹42.71</span></div>
+            <div class="breakup-item"><span>SC (Included in ticket cost):</span><span id="displaySc">₹34.89</span></div>
+            <div class="breakup-item"><span>Ticket Cost:</span><span id="displayTicketCost">₹560.00</span></div>
           </div>
 
           <div class="ticket-count-row">
@@ -164,6 +168,97 @@
       </div>
     </div>
   </main>
+
+  <!-- 1. PIN AUTHENTICATION MODAL -->
+  <div class="modal-overlay" id="pinModal">
+    <div class="modal-content modal-sm">
+      <div class="modal-header">
+        <h3 class="modal-title">🔒 Developer Security PIN</h3>
+        <button class="modal-close" id="closePinModal">&times;</button>
+      </div>
+      <p style="font-size: 0.85rem; color: #bbb; margin-bottom: 1rem;">
+        Enter 6-digit developer PIN to unlock ticket config editor:
+      </p>
+      <div class="pin-form">
+        <input type="password" id="pinInput" class="form-control" maxlength="6" placeholder="Enter PIN (e.g. 123123)" autofocus>
+        <div id="pinErrorMsg" class="error-msg" style="display: none;">❌ Invalid PIN. Please try again.</div>
+        <button id="btnVerifyPin" class="btn btn-gold full-width" style="margin-top: 1rem;">Unlock Config</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. DEVELOPER CONFIG EDITOR MODAL -->
+  <div class="modal-overlay" id="devConfigModal">
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title">⚙️ Developer Config Editor</h3>
+        <button class="modal-close" id="closeConfigModal">&times;</button>
+      </div>
+
+      <form id="devForm" onsubmit="return false;" class="dev-form-grid">
+        <div class="form-group full-width">
+          <label>Movie Name & Certification</label>
+          <input type="text" id="devMovie" class="form-control" placeholder="SPIDER-MAN - HINDI (UA)">
+        </div>
+
+        <div class="form-group">
+          <label>Show Date</label>
+          <input type="date" id="devDate" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>Show Time</label>
+          <input type="time" id="devTime" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>Number of Tickets</label>
+          <input type="number" id="devTicketCount" class="form-control" min="1" max="20">
+        </div>
+
+        <div class="form-group">
+          <label>Price Per Ticket (₹)</label>
+          <input type="number" id="devTicketPrice" class="form-control" min="0" step="10">
+        </div>
+
+        <div class="form-group">
+          <label>Cinema Branch</label>
+          <input type="text" id="devCinema" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>Screen Number</label>
+          <input type="text" id="devScreen" class="form-control">
+        </div>
+
+        <div class="form-group full-width">
+          <label>Seat Class & Seat Numbers</label>
+          <input type="text" id="devSeats" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>Booking ID</label>
+          <input type="text" id="devBookingId" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>Invoice No.</label>
+          <input type="text" id="devInvoiceNo" class="form-control">
+        </div>
+
+        <div class="form-group full-width price-preview-bar">
+          <span>Total Auto Calculation:</span>
+          <strong id="devTotalPreview">₹560.00</strong>
+        </div>
+
+        <div class="full-width action-flex">
+          <button id="btnSaveConfig" class="btn btn-gold full-width">💾 Save & Update Ticket</button>
+          <button id="btnResetConfig" class="btn btn-outline" style="white-space: nowrap;">Reset Default</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
 
   <footer class="app-footer">
     <p>© 2026 Rajhans Cinemas Multiplex. Digital E-Ticket.</p>
