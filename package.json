@@ -1,0 +1,25 @@
+{
+  "name": "rajhans-tikit-generator",
+  "version": "1.0.0",
+  "description": "Configurable Rajhans Multiplex Movie Ticket Generator and Shareable Link App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "ticket",
+    "movie",
+    "rajhans",
+    "cinema",
+    "render"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

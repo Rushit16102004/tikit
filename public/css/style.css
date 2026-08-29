@@ -1,0 +1,605 @@
+:root {
+  --bg-dark: #0b0c10;
+  --bg-card: #151821;
+  --bg-input: #1f2430;
+  --accent-red: #e50914;
+  --accent-gold: #f5af19;
+  --accent-gold-dark: #e65c00;
+  --text-main: #ffffff;
+  --text-muted: #9aa0a6;
+  --border-color: rgba(245, 175, 25, 0.2);
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 2rem;
+  background: rgba(21, 24, 33, 0.95);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-logo {
+  height: 38px;
+  width: auto;
+}
+
+.app-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--accent-gold);
+}
+
+.header-badge {
+  background: linear-gradient(135deg, var(--accent-red), var(--accent-gold-dark));
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.main-container {
+  max-width: 1250px;
+  width: 95%;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: 1fr 450px;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 950px) {
+  .main-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Configurator Form Panel */
+.panel {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.8rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid rgba(245, 175, 25, 0.2);
+}
+
+.panel-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.form-control {
+  background: var(--bg-input);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: var(--accent-gold);
+}
+
+.price-summary-box {
+  background: linear-gradient(135deg, rgba(229, 9, 20, 0.15), rgba(245, 175, 25, 0.15));
+  border: 1px solid rgba(245, 175, 25, 0.3);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-summary-box .lbl {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #eee;
+}
+
+.price-summary-box .subtext {
+  font-size: 0.72rem;
+  color: #aaa;
+}
+
+.price-summary-box .amount {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.75rem 1.3rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-red), #b30000);
+  color: white;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+  color: #111;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.btn-sm {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+}
+
+/* ==========================================================================
+   EXACT RAJHANS DIGITAL TICKET DESIGN (Replicating Screenshots 1.png & 2.png)
+   ========================================================================== */
+
+.ticket-preview-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.rajhans-ticket {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  color: #111111;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  font-size: 0.9rem;
+}
+
+/* Header */
+.rajhans-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.4rem 0.8rem 1.4rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.rajhans-brand-logo {
+  height: 65px;
+  width: auto;
+  object-fit: contain;
+}
+
+.header-store-box {
+  text-align: right;
+  border-left: 2px solid #ddd;
+  padding-left: 10px;
+}
+
+.store-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #222;
+}
+
+.store-details-link {
+  font-size: 0.82rem;
+  color: #666;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Rating box */
+.rating-box {
+  background: #f4f6f8;
+  padding: 1rem;
+  text-align: center;
+  margin: 0.8rem 1.4rem;
+  border-radius: 8px;
+}
+
+.rating-title {
+  font-size: 0.92rem;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.stars-row {
+  color: #ffcc00;
+  font-size: 1.4rem;
+  letter-spacing: 4px;
+}
+
+/* Address */
+.address-section {
+  padding: 0.5rem 1.4rem;
+  color: #444;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.address-text {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.tax-info {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* Show Info Section with Icons */
+.show-info-section {
+  padding: 1rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.icon-col {
+  color: #333;
+  display: flex;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.bold-text {
+  font-weight: 700;
+  color: #111;
+  font-size: 0.95rem;
+}
+
+.seats-row-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.more-seats-tag {
+  background: #dcdfe3;
+  color: #555;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+/* Invoice Metadata */
+.invoice-meta-section {
+  padding: 0.5rem 1.4rem 1rem 1.4rem;
+  font-size: 0.92rem;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meta-row {
+  font-weight: 600;
+}
+
+/* Perforation Cut Line */
+.perforation-divider {
+  position: relative;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.notch {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background-color: var(--bg-dark);
+  border-radius: 50%;
+}
+
+.notch-left {
+  left: -12px;
+}
+
+.notch-right {
+  right: -12px;
+}
+
+.perforation-divider .dashed-line {
+  width: 100%;
+  border-top: 2px dashed #bbb;
+  margin: 0 20px;
+}
+
+.scan-instruction {
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+  margin-top: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+/* QR Code Section */
+.qr-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 1.4rem 1.5rem 1.4rem;
+}
+
+.qr-wrapper {
+  width: 150px;
+  height: 150px;
+  padding: 6px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.qr-wrapper img,
+.qr-wrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.booking-id-text {
+  font-size: 0.88rem;
+  color: #666;
+  font-family: monospace;
+}
+
+/* Pricing Section */
+.pricing-section {
+  padding: 0 1.4rem 1.4rem 1.4rem;
+}
+
+.total-paid-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 1rem;
+}
+
+.breakup-title {
+  font-weight: 700;
+  color: #333;
+  font-size: 0.88rem;
+  margin-bottom: 6px;
+}
+
+.breakup-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 1.2rem;
+}
+
+.breakup-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ticket-count-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 1.5rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-links a {
+  color: #222;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+/* Razorpay Banner */
+.razorpay-banner {
+  background: #f2f4f8;
+  padding: 1.2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.banner-text {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.modal-title {
+  color: var(--accent-gold);
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.copy-url-box {
+  display: flex;
+  gap: 8px;
+}
+
+.copy-url-box input {
+  flex: 1;
+}
+
+footer.app-footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: auto;
+}
+
+/* Print Rules */
+@media print {
+  body {
+    background: #fff !important;
+  }
+  header.app-header,
+  .panel,
+  .action-buttons,
+  footer.app-footer,
+  .modal-overlay {
+    display: none !important;
+  }
+  .main-container {
+    display: block !important;
+    margin: 0 !important;
+  }
+  .ticket-preview-wrapper {
+    margin: 0 auto;
+  }
+  .rajhans-ticket {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+  .notch {
+    background-color: #fff !important;
+    border: 1px solid #ccc !important;
+  }
+}

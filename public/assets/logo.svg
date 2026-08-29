@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 120" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE066" />
+      <stop offset="50%" stop-color="#F5AF19" />
+      <stop offset="100%" stop-color="#E65C00" />
+    </linearGradient>
+    <linearGradient id="rubyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E50914" />
+      <stop offset="100%" stop-color="#800000" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Crown / Emblem -->
+  <g transform="translate(10, 10)">
+    <!-- Shield / Crown base -->
+    <path d="M 45 10 L 70 30 L 60 75 L 45 90 L 30 75 L 20 30 Z" fill="url(#rubyGrad)" stroke="url(#goldGrad)" stroke-width="3" />
+    <!-- Crown Jewels / Spikes -->
+    <path d="M 25 35 L 35 25 L 45 40 L 55 25 L 65 35 L 58 60 L 32 60 Z" fill="url(#goldGrad)" />
+    <!-- Center Star -->
+    <polygon points="45,43 48,51 56,51 50,56 52,64 45,59 38,64 40,56 34,51 42,51" fill="#FFFFFF" />
+    <!-- Film Reel arcs -->
+    <circle cx="45" cy="50" r="38" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" stroke-dasharray="8 4" />
+  </g>
+
+  <!-- Brand Text -->
+  <text x="110" y="55" font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="900" font-size="34" fill="url(#goldGrad)" letter-spacing="2" filter="url(#glow)">
+    RAJHANS
+  </text>
+  <text x="112" y="88" font-family="'Roboto', 'Segoe UI', sans-serif" font-weight="700" font-size="20" fill="#E50914" letter-spacing="8">
+    CINEMAS
+  </text>
+  <text x="315" y="88" font-family="'Roboto', 'Segoe UI', sans-serif" font-weight="400" font-size="11" fill="#CCCCCC" letter-spacing="2">
+    MULTIPLEX
+  </text>
+</svg>
