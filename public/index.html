@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rajhans Cinemas - Digital Ticket Generator</title>
+  <title>Rajhans Cinemas - E-Ticket</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
@@ -18,138 +18,18 @@
 </head>
 <body>
 
-  <!-- App Top Navigation Header -->
+  <!-- App Header -->
   <header class="app-header">
     <div class="brand-wrapper">
       <img src="assets/logo.png" alt="Rajhans Cinemas" class="app-logo">
-      <span class="app-title">Rajhans Cinemas E-Ticket Generator</span>
+      <span class="app-title">Rajhans Cinemas E-Ticket</span>
     </div>
-    <span class="header-badge">Render Ready 🚀</span>
+    <button onclick="window.print()" class="btn-print-top">🖨️ Print / Save</button>
   </header>
 
-  <!-- Main Container -->
+  <!-- Main Container: Direct Ticket View -->
   <main class="main-container">
-
-    <!-- Configurator Form Panel -->
-    <section class="panel form-panel">
-      <div class="panel-header">
-        <h2 class="panel-title">⚙️ Ticket Variables Config</h2>
-        <button id="btnRandomizeId" class="btn btn-outline btn-sm">🎲 Randomize IDs</button>
-      </div>
-
-      <form id="ticketForm" onsubmit="return false;" class="form-grid">
-
-        <!-- Movie Name -->
-        <div class="form-group full-width">
-          <label for="movieName">Movie Name & Certification *</label>
-          <input type="text" id="movieName" class="form-control" value="TOXIC - HINDI (A)" placeholder="e.g. TOXIC - HINDI (A)">
-        </div>
-
-        <!-- Cinema & Address -->
-        <div class="form-group">
-          <label for="cinema">Cinema Branch *</label>
-          <select id="cinema" class="form-control">
-            <option value="Rajhans Cinemas - Katargam" selected>Rajhans Cinemas - Katargam</option>
-            <option value="Rajhans Cinemas - Vesu">Rajhans Cinemas - Vesu</option>
-            <option value="Rajhans Cinemas - Varachha">Rajhans Cinemas - Varachha</option>
-            <option value="Rajhans Cinemas - Pal">Rajhans Cinemas - Pal</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="cinemaAddress">Cinema Address & Mall</label>
-          <input type="text" id="cinemaAddress" class="form-control" value="Rajhans Flamingo Mall, Ambatalavadi, Katargam, Surat, Gujarat 395004, India">
-        </div>
-
-        <!-- Date & Time -->
-        <div class="form-group">
-          <label for="date">Show Date *</label>
-          <input type="date" id="date" class="form-control">
-        </div>
-
-        <div class="form-group">
-          <label for="time">Show Time *</label>
-          <input type="time" id="time" class="form-control" value="22:30">
-        </div>
-
-        <!-- Screen & Class -->
-        <div class="form-group">
-          <label for="screen">Screen Number</label>
-          <input type="number" id="screen" class="form-control" value="1" min="1" max="10">
-        </div>
-
-        <div class="form-group">
-          <label for="ticketClass">Seat Class</label>
-          <select id="ticketClass" class="form-control">
-            <option value="EXECUTIVE" selected>EXECUTIVE</option>
-            <option value="RECLINER">RECLINER</option>
-            <option value="CLUB">CLUB</option>
-            <option value="ROYAL">ROYAL</option>
-          </select>
-        </div>
-
-        <!-- Ticket Count & Single Ticket Price -->
-        <div class="form-group">
-          <label for="ticketCount">Number of Tickets *</label>
-          <input type="number" id="ticketCount" class="form-control" min="1" max="20" value="2">
-        </div>
-
-        <div class="form-group">
-          <label for="ticketPrice">Single Ticket Price (₹) *</label>
-          <input type="number" id="ticketPrice" class="form-control" min="0" step="10" value="340">
-        </div>
-
-        <!-- Live Price Calculation Box -->
-        <div class="price-summary-box full-width">
-          <div>
-            <div class="lbl">Calculated Total Money</div>
-            <div class="subtext">(Number of Tickets × Ticket Price)</div>
-          </div>
-          <div class="amount" id="formTotalPrice">₹680.00</div>
-        </div>
-
-        <!-- Seat Numbers & Custom Details -->
-        <div class="form-group full-width">
-          <label for="seats">Seat Numbers</label>
-          <input type="text" id="seats" class="form-control" value="EXECUTIVE C-10, EXE C-11">
-        </div>
-
-        <!-- Invoice Metadata -->
-        <div class="form-group">
-          <label for="invoiceNo">Invoice No.</label>
-          <input type="text" id="invoiceNo" class="form-control" value="01003013">
-        </div>
-
-        <div class="form-group">
-          <label for="userId">User ID</label>
-          <input type="text" id="userId" class="form-control" value="1303">
-        </div>
-
-        <div class="form-group">
-          <label for="workstation">Workstation</label>
-          <input type="text" id="workstation" class="form-control" value="HORAJPC529">
-        </div>
-
-        <div class="form-group">
-          <label for="bookingId">Booking ID</label>
-          <input type="text" id="bookingId" class="form-control" value="T18 0000000001700366">
-        </div>
-
-      </form>
-
-      <!-- Action Buttons -->
-      <div class="action-buttons">
-        <button id="btnShareLink" class="btn btn-gold">
-          🔗 Generate Shareable Link
-        </button>
-        <button id="btnPrint" class="btn btn-primary">
-          🖨️ Print / Download Ticket
-        </button>
-      </div>
-    </section>
-
-    <!-- EXACT RAJHANS TICKET CARD PREVIEW -->
-    <section class="ticket-preview-wrapper">
+    <div class="ticket-preview-wrapper">
       <div class="rajhans-ticket" id="ticketCard">
 
         <!-- Top Branding Header -->
@@ -282,31 +162,15 @@
         </div>
 
       </div>
-    </section>
-
+    </div>
   </main>
 
-  <!-- Share Link Modal -->
-  <div class="modal-overlay" id="shareModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">🔗 Shareable Ticket Link</h3>
-        <button class="modal-close" id="closeModalBtn">&times;</button>
-      </div>
-      <p style="font-size: 0.88rem; color: #aaa; margin-bottom: 1rem;">
-        Share this URL with anyone! When they open it, it will render this exact ticket online.
-      </p>
-      <div class="copy-url-box">
-        <input type="text" id="shareUrlInput" class="form-control" readonly>
-        <button id="btnCopyUrl" class="btn btn-gold">Copy Link</button>
-      </div>
-    </div>
-  </div>
-
   <footer class="app-footer">
-    <p>© 2026 Rajhans Cinemas Multiplex. Built for Render Cloud Deployment.</p>
+    <p>© 2026 Rajhans Cinemas Multiplex. Digital E-Ticket.</p>
   </footer>
 
+  <!-- Config & Application Scripts -->
+  <script src="js/config.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

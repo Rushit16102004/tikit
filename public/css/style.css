@@ -1,14 +1,9 @@
 :root {
   --bg-dark: #0b0c10;
   --bg-card: #151821;
-  --bg-input: #1f2430;
-  --accent-red: #e50914;
   --accent-gold: #f5af19;
-  --accent-gold-dark: #e65c00;
   --text-main: #ffffff;
   --text-muted: #9aa0a6;
-  --border-color: rgba(245, 175, 25, 0.2);
-  --radius: 12px;
 }
 
 * {
@@ -32,7 +27,7 @@ header.app-header {
   justify-content: space-between;
   padding: 0.8rem 2rem;
   background: rgba(21, 24, 33, 0.95);
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid rgba(245, 175, 25, 0.2);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -45,176 +40,41 @@ header.app-header {
 }
 
 .app-logo {
-  height: 38px;
+  height: 36px;
   width: auto;
 }
 
 .app-title {
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--accent-gold);
 }
 
-.header-badge {
-  background: linear-gradient(135deg, var(--accent-red), var(--accent-gold-dark));
-  color: #fff;
-  font-size: 0.72rem;
+.btn-print-top {
+  background: linear-gradient(135deg, var(--accent-gold), #e65c00);
+  color: #111;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
   font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 20px;
+  font-size: 0.82rem;
+  cursor: pointer;
 }
 
 .main-container {
-  max-width: 1250px;
+  max-width: 600px;
   width: 95%;
   margin: 2rem auto;
-  display: grid;
-  grid-template-columns: 1fr 450px;
-  gap: 2rem;
-  align-items: start;
-}
-
-@media (max-width: 950px) {
-  .main-container {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Configurator Form Panel */
-.panel {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.8rem;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-}
-
-.panel-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.8rem;
-  border-bottom: 2px solid rgba(245, 175, 25, 0.2);
-}
-
-.panel-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--accent-gold);
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.1rem;
-}
-
-.full-width {
-  grid-column: 1 / -1;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.form-group label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-}
-
-.form-control {
-  background: var(--bg-input);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  padding: 0.7rem 0.9rem;
-  color: #fff;
-  font-size: 0.9rem;
-  outline: none;
-}
-
-.form-control:focus {
-  border-color: var(--accent-gold);
-}
-
-.price-summary-box {
-  background: linear-gradient(135deg, rgba(229, 9, 20, 0.15), rgba(245, 175, 25, 0.15));
-  border: 1px solid rgba(245, 175, 25, 0.3);
-  border-radius: 10px;
-  padding: 1rem 1.2rem;
-  margin-top: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.price-summary-box .lbl {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #eee;
-}
-
-.price-summary-box .subtext {
-  font-size: 0.72rem;
-  color: #aaa;
-}
-
-.price-summary-box .amount {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--accent-gold);
-}
-
-.action-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.btn {
-  padding: 0.75rem 1.3rem;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 0.88rem;
-  cursor: pointer;
-  border: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.2s ease;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--accent-red), #b30000);
-  color: white;
-}
-
-.btn-gold {
-  background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
-  color: #111;
-}
-
-.btn-outline {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-
-.btn-sm {
-  padding: 4px 10px;
-  font-size: 0.75rem;
+  justify-content: center;
 }
 
 /* ==========================================================================
-   EXACT RAJHANS DIGITAL TICKET DESIGN (Replicating Screenshots 1.png & 2.png)
+   EXACT RAJHANS DIGITAL TICKET CARD
    ========================================================================== */
 
 .ticket-preview-wrapper {
+  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -226,7 +86,7 @@ header.app-header {
   color: #111111;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
   position: relative;
   font-size: 0.9rem;
 }
@@ -305,7 +165,7 @@ header.app-header {
   color: #666;
 }
 
-/* Show Info Section with Icons */
+/* Show Info Section */
 .show-info-section {
   padding: 1rem 1.4rem;
   display: flex;
@@ -511,61 +371,6 @@ header.app-header {
   color: #555;
 }
 
-/* Modal */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
-
-.modal-overlay.active {
-  display: flex;
-}
-
-.modal-content {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 500px;
-  width: 90%;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.8rem;
-}
-
-.modal-title {
-  color: var(--accent-gold);
-}
-
-.modal-close {
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.copy-url-box {
-  display: flex;
-  gap: 8px;
-}
-
-.copy-url-box input {
-  flex: 1;
-}
-
 footer.app-footer {
   text-align: center;
   padding: 1.5rem;
@@ -581,18 +386,12 @@ footer.app-footer {
     background: #fff !important;
   }
   header.app-header,
-  .panel,
-  .action-buttons,
-  footer.app-footer,
-  .modal-overlay {
+  footer.app-footer {
     display: none !important;
   }
   .main-container {
     display: block !important;
     margin: 0 !important;
-  }
-  .ticket-preview-wrapper {
-    margin: 0 auto;
   }
   .rajhans-ticket {
     box-shadow: none !important;
