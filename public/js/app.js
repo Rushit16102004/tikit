@@ -48,6 +48,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnSaveConfig = document.getElementById('btnSaveConfig');
   const btnResetConfig = document.getElementById('btnResetConfig');
 
+  // Helper: Auto-generate seat numbers array based on count (e.g., EXECUTIVE C-10, C-11, C-12)
+  function generateSeatsForCount(count) {
+    const list = [];
+    const startNum = 10;
+    for (let i = 0; i < count; i++) {
+      const seatNum = startNum + i;
+      if (i === 0) {
+        list.push(`EXECUTIVE C-${seatNum}`);
+      } else {
+        list.push(`C-${seatNum}`);
+      }
+    }
+    return list.join(', ');
+  }
+
   // Active Ticket Configuration state
   let currentConfig = {};
 
@@ -98,7 +113,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Total Calculation (Tickets * Price)
     const totalAmount = count * singlePrice;
 
-    const seats = cfg.seats || `EXECUTIVE C-10, EXE C-11`;
+    // Seats auto-sync: If seats not specified or doesn't match count format, auto generate seats
+    let seats = cfg.seats;
+    if (!seats) {
+      seats = generateSeatsForCount(count);
+    }
+
     const invoiceNo = cfg.invoiceNo || '01003014';
     const userId = cfg.userId || '1303';
     const workstation = cfg.workstation || 'HORAJPC529';
@@ -211,11 +231,15 @@ document.addEventListener('DOMContentLoaded', () => {
     devMovie.value = cfg.movieName || '';
     devDate.value = cfg.date || '';
     devTime.value = cfg.time || '';
-    devTicketCount.value = cfg.ticketCount || 2;
+    devTicketCount.value = cfg.ticketCount || 3;
     devTicketPrice.value = cfg.ticketPrice || 280;
     devCinema.value = cfg.cinema || '';
     devScreen.value = cfg.screen || '1';
-    devSeats.value = cfg.seats || '';
+    
+    // Auto-update seat input if empty or matching count
+    const count = parseInt(devTicketCount.value) || 3;
+    devSeats.value = cfg.seats || generateSeatsForCount(count);
+
     devBookingId.value = cfg.bookingId || '';
     devInvoiceNo.value = cfg.invoiceNo || '';
 
@@ -226,6 +250,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateDevTotalPreview() {
     const count = parseInt(devTicketCount.value) || 1;
     const price = parseFloat(devTicketPrice.value) || 0;
+
+    // Auto update seat list input when developer changes ticket count
+    devSeats.value = generateSeatsForCount(count);
+
     devTotalPreview.textContent = `₹${(count * price).toFixed(2)}`;
   }
 
@@ -269,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnResetConfig) btnResetConfig.addEventListener('click', resetDevConfig);
 
   devTicketCount.addEventListener('input', updateDevTotalPreview);
+  devTicketCount.addEventListener('change', updateDevTotalPreview);
   devTicketPrice.addEventListener('input', updateDevTotalPreview);
 
   // Initial Render
