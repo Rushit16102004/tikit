@@ -23,12 +23,12 @@ const TICKET_CONFIG = {
   ticketClass: "EXECUTIVE",
 
   // Number of Tickets & Single Ticket Price (₹)
-  ticketCount: 2,
+  ticketCount: 3,
   ticketPrice: 280,
-  // Total Money (₹560.00) is automatically calculated in code as (ticketCount * ticketPrice)
+  // Total Money (₹840.00) is automatically calculated in code as (ticketCount * ticketPrice = 3 * 280)
 
-  // Seat Numbers List
-  seats: "EXECUTIVE C-10, EXE C-11",
+  // Seat Numbers List (3 Tickets)
+  seats: "EXECUTIVE C-10, C-11, C-12",
 
   // Invoice & System Metadata
   invoiceNo: "01003014",
