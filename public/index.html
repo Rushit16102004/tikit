@@ -60,8 +60,8 @@
           <div class="address-text" id="displayAddress">
             Rajhans Flamingo Mall, Ambatalavadi, Katargam, Surat, Gujarat 395004, India
           </div>
-          <div class="tax-info">CIN: U59130GJ2006PTC049677</div>
-          <div class="tax-info">GSTIN: 24AADCR4726N1Z4 / SAC: 999615</div>
+          <div class="tax-info" id="displayCin">CIN: U59130GJ2006PTC049677</div>
+          <div class="tax-info" id="displayGstin">GSTIN: 24AADCR4726N1Z4 / SAC: 999615</div>
         </div>
 
         <!-- Show Info Section with Icons -->
@@ -100,7 +100,7 @@
             </div>
             <div class="text-col">
               <div class="seats-row-flex">
-                <div class="bold-text" id="displaySeatsInfo">Screen: 1 | 2 Seats | EXECUTIVE C-10, EXE...</div>
+                <div class="bold-text" id="displaySeatsInfo">Screen: 1 | 3 Seats | EXECUTIVE C-10, C-11, C-12</div>
                 <span class="more-seats-tag">More seats</span>
               </div>
             </div>
@@ -134,21 +134,21 @@
         <div class="pricing-section">
           <div class="total-paid-row">
             <span class="label">Total amount paid:</span>
-            <span class="value" id="displayTotalPaid">₹560.00</span>
+            <span class="value" id="displayTotalPaid">₹840.00</span>
           </div>
 
           <div class="breakup-title">Cost Breakup:</div>
           <div class="breakup-list">
-            <div class="breakup-item"><span>Net Charge:</span><span id="displayNetCharge">₹439.68</span></div>
-            <div class="breakup-item"><span>CGST :</span><span id="displayCgst">₹42.71</span></div>
-            <div class="breakup-item"><span>SGST :</span><span id="displaySgst">₹42.71</span></div>
-            <div class="breakup-item"><span>SC (Included in ticket cost):</span><span id="displaySc">₹34.89</span></div>
-            <div class="breakup-item"><span>Ticket Cost:</span><span id="displayTicketCost">₹560.00</span></div>
+            <div class="breakup-item"><span>Net Charge:</span><span id="displayNetCharge">₹659.52</span></div>
+            <div class="breakup-item"><span>CGST :</span><span id="displayCgst">₹64.07</span></div>
+            <div class="breakup-item"><span>SGST :</span><span id="displaySgst">₹64.07</span></div>
+            <div class="breakup-item"><span>SC (Included in ticket cost):</span><span id="displaySc">₹52.34</span></div>
+            <div class="breakup-item"><span>Ticket Cost:</span><span id="displayTicketCost">₹840.00</span></div>
           </div>
 
           <div class="ticket-count-row">
             <span class="label">No. of tickets</span>
-            <span class="count-value" id="displayCountVal">x 2</span>
+            <span class="count-value" id="displayCountVal">x 3</span>
           </div>
 
           <div class="footer-links">
@@ -187,20 +187,49 @@
     </div>
   </div>
 
-  <!-- 2. DEVELOPER CONFIG EDITOR MODAL -->
+  <!-- 2. FULL DEVELOPER CONFIG EDITOR MODAL -->
   <div class="modal-overlay" id="devConfigModal">
     <div class="modal-content modal-lg">
       <div class="modal-header">
-        <h3 class="modal-title">⚙️ Developer Config Editor</h3>
+        <h3 class="modal-title">⚙️ Complete Developer Ticket Config</h3>
         <button class="modal-close" id="closeConfigModal">&times;</button>
       </div>
 
       <form id="devForm" onsubmit="return false;" class="dev-form-grid">
+
+        <!-- Movie Details -->
         <div class="form-group full-width">
           <label>Movie Name & Certification</label>
-          <input type="text" id="devMovie" class="form-control" placeholder="SPIDER-MAN - HINDI (UA)">
+          <input type="text" id="devMovie" class="form-control" placeholder="e.g. SPIDER-MAN - HINDI (UA)">
         </div>
 
+        <!-- Cinema & Address Details -->
+        <div class="form-group">
+          <label>Cinema / Theater Name</label>
+          <input type="text" id="devCinema" class="form-control" placeholder="e.g. Rajhans Cinemas - Katargam">
+        </div>
+
+        <div class="form-group">
+          <label>Screen Number</label>
+          <input type="text" id="devScreen" class="form-control" placeholder="e.g. 1">
+        </div>
+
+        <div class="form-group full-width">
+          <label>Theater Address & Mall Details</label>
+          <input type="text" id="devCinemaAddress" class="form-control" placeholder="e.g. Rajhans Flamingo Mall, Ambatalavadi, Katargam, Surat...">
+        </div>
+
+        <div class="form-group">
+          <label>CIN Number</label>
+          <input type="text" id="devCin" class="form-control" placeholder="e.g. U59130GJ2006PTC049677">
+        </div>
+
+        <div class="form-group">
+          <label>GSTIN & SAC Code</label>
+          <input type="text" id="devGstin" class="form-control" placeholder="e.g. 24AADCR4726N1Z4 / SAC: 999615">
+        </div>
+
+        <!-- Date & Time -->
         <div class="form-group">
           <label>Show Date</label>
           <input type="date" id="devDate" class="form-control">
@@ -211,6 +240,7 @@
           <input type="time" id="devTime" class="form-control">
         </div>
 
+        <!-- Ticket Count & Pricing -->
         <div class="form-group">
           <label>Number of Tickets</label>
           <input type="number" id="devTicketCount" class="form-control" min="1" max="20">
@@ -221,36 +251,40 @@
           <input type="number" id="devTicketPrice" class="form-control" min="0" step="10">
         </div>
 
-        <div class="form-group">
-          <label>Cinema Branch</label>
-          <input type="text" id="devCinema" class="form-control">
-        </div>
-
-        <div class="form-group">
-          <label>Screen Number</label>
-          <input type="text" id="devScreen" class="form-control">
-        </div>
-
+        <!-- Seats & Class -->
         <div class="form-group full-width">
           <label>Seat Class & Seat Numbers</label>
-          <input type="text" id="devSeats" class="form-control">
+          <input type="text" id="devSeats" class="form-control" placeholder="e.g. EXECUTIVE C-10, C-11, C-12">
+        </div>
+
+        <!-- System Metadata -->
+        <div class="form-group">
+          <label>Invoice Number</label>
+          <input type="text" id="devInvoiceNo" class="form-control" placeholder="e.g. 01003014">
         </div>
 
         <div class="form-group">
-          <label>Booking ID</label>
-          <input type="text" id="devBookingId" class="form-control">
+          <label>User ID</label>
+          <input type="text" id="devUserId" class="form-control" placeholder="e.g. 1303">
         </div>
 
         <div class="form-group">
-          <label>Invoice No.</label>
-          <input type="text" id="devInvoiceNo" class="form-control">
+          <label>Workstation</label>
+          <input type="text" id="devWorkstation" class="form-control" placeholder="e.g. HORAJPC529">
         </div>
 
+        <div class="form-group">
+          <label>Booking Reference ID</label>
+          <input type="text" id="devBookingId" class="form-control" placeholder="e.g. T18 0000000001700367">
+        </div>
+
+        <!-- Calculated Summary Bar -->
         <div class="form-group full-width price-preview-bar">
           <span>Total Auto Calculation:</span>
-          <strong id="devTotalPreview">₹560.00</strong>
+          <strong id="devTotalPreview">₹840.00</strong>
         </div>
 
+        <!-- Action Buttons -->
         <div class="full-width action-flex">
           <button id="btnSaveConfig" class="btn btn-gold full-width">💾 Save & Update Ticket</button>
           <button id="btnResetConfig" class="btn btn-outline" style="white-space: nowrap;">Reset Default</button>

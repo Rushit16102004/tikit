@@ -1,6 +1,6 @@
 // ============================================================================
 // DEVELOPER TICKET CONFIGURATION FILE
-// Edit any values below to customize the ticket parameters!
+// Edit any values below to customize the default ticket parameters!
 // ============================================================================
 const TICKET_CONFIG = {
   // Movie Name & Certification
@@ -11,6 +11,10 @@ const TICKET_CONFIG = {
 
   // Cinema Full Address & Mall Details
   cinemaAddress: "Rajhans Flamingo Mall, Ambatalavadi, Katargam, Surat, Gujarat 395004, India",
+
+  // Legal & Tax IDs
+  cin: "U59130GJ2006PTC049677",
+  gstin: "24AADCR4726N1Z4 / SAC: 999615",
 
   // Show Date (Format: YYYY-MM-DD)
   date: "2026-08-29",
@@ -25,9 +29,9 @@ const TICKET_CONFIG = {
   // Number of Tickets & Single Ticket Price (₹)
   ticketCount: 3,
   ticketPrice: 280,
-  // Total Money (₹840.00) is automatically calculated in code as (ticketCount * ticketPrice = 3 * 280)
+  // Total Money (₹840.00) is automatically calculated in code as (ticketCount * ticketPrice)
 
-  // Seat Numbers List (3 Tickets)
+  // Seat Numbers List
   seats: "EXECUTIVE C-10, C-11, C-12",
 
   // Invoice & System Metadata
